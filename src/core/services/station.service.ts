@@ -9,6 +9,8 @@ export class StationService {
 
   public async getStation(args: GetStationsArgs): Promise<StationModel> {
     // TODO: implement fetching station from the OpenData service
+
+    // No instructions provided...
     return {} as any;
   }
 

@@ -1,7 +1,7 @@
 export const toDateString = (date: Date) => {
-  // TODO: implement date to date string conversion
+  return date.toISOString().slice(0, 10);
 };
 
 export const toTimeString = (date: Date) => {
-  // TODO: implement date to time string conversion
+  return date.toISOString().slice(11, 16);
 };

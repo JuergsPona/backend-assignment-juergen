@@ -22,7 +22,7 @@ export class OpendataService {
   public async getStations(
     params: GetStationsParams,
   ): Promise<StationSchema[]> {
-    // only return locations of type "station"
+    // only return locations of type "station" (a tad dirty...)
     const stationParams: GetStationsParams = {
       query: params.query,
       type: 'station',
@@ -45,11 +45,6 @@ export class OpendataService {
         params: params,
       }),
     );
-
-    // TODO: edit the response here or in the stations service?
-
     return response.data.connections;
-
-    return [];
   }
 }

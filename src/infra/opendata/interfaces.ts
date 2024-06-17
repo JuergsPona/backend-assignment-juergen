@@ -6,9 +6,9 @@ export interface GetStationsParams {
 }
 
 export interface GetConnectionsParams {
-  from?: string;
-  to?: string;
-  via?: string;
+  from: string;
+  to: string;
+  via?: string[] | null;
   date?: string;
   time?: string;
   isArrivalTime?: boolean;
