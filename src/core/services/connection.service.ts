@@ -6,8 +6,9 @@ import {
   encodeCursor,
   toDateString,
   toTimeString,
+  transformData,
 } from '../helpers';
-import { ConnectionListModel, ConnectionModel } from '../models';
+import { ConnectionListModel } from '../models';
 
 @Injectable()
 export class ConnectionService {
@@ -31,17 +32,11 @@ export class ConnectionService {
       page: page,
     };
 
-    const data: ConnectionModel[] = await this.opendataService.getConnections(
-      connectionParam,
-    );
+    const data = await this.opendataService.getConnections(connectionParam);
+    console.log('🚀 ~ ConnectionService ~ data:', data[1]);
 
     const endCursor = encodeCursor(page + data.length);
 
-    return {
-      nodes: data,
-      pageInfo: {
-        endCursor,
-      },
-    };
+    return transformData(data, endCursor);
   }
 }
