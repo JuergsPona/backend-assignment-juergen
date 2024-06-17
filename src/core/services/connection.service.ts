@@ -37,9 +37,6 @@ export class ConnectionService {
 
     const endCursor = encodeCursor(page + data.length);
 
-    // const connections: ConnectionListModel[] = data.filter((connectionNodes) => )
-
-    // TODO: get connections from the OpenData service
     return {
       nodes: data,
       pageInfo: {
