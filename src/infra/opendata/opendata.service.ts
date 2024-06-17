@@ -1,8 +1,8 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { ConnectionSchema, StationSchema } from './schemas';
+import { firstValueFrom } from 'rxjs';
 import { GetConnectionsParams, GetStationsParams } from './interfaces';
-
+import { ConnectionSchema, StationSchema } from './schemas';
 @Injectable()
 export class OpendataService {
   /**
@@ -17,17 +17,39 @@ export class OpendataService {
    */
   constructor(private httpService: HttpService) {}
 
+  private readonly apiUrl = `https://transport.opendata.ch/v1/`;
+
   public async getStations(
     params: GetStationsParams,
   ): Promise<StationSchema[]> {
-    // TODO: implement fetching stations from OpenData API
-    return [];
+    // only return locations of type "station"
+    const stationParams: GetStationsParams = {
+      query: params.query,
+      type: 'station',
+    };
+
+    const response = await firstValueFrom(
+      this.httpService.get(`${this.apiUrl}locations`, {
+        params: stationParams,
+      }),
+    );
+
+    return response.data.stations;
   }
 
   public async getConnections(
     params: GetConnectionsParams,
   ): Promise<ConnectionSchema[]> {
-    // TODO: implement fetching connections from OpenData API
+    const response = await firstValueFrom(
+      this.httpService.get(`${this.apiUrl}connections`, {
+        params: params,
+      }),
+    );
+
+    // TODO: edit the response here or in the stations service?
+
+    return response.data.connections;
+
     return [];
   }
 }

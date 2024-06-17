@@ -1,9 +1,18 @@
 export interface GetStationsParams {
-  // TODO: add params
-  TODO: 'TODO';
+  query?: string;
+  x?: number;
+  y?: number;
+  type?: string;
 }
 
 export interface GetConnectionsParams {
-  // TODO: add params
-  TODO: 'TODO';
+  from?: string;
+  to?: string;
+  via?: string;
+  date?: string;
+  time?: string;
+  isArrivalTime?: boolean;
+  transportations?: string[]; // train, tram, ship, bus, cableway
+  limit?: number;
+  page?: number;
 }
